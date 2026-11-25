@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.wesleti_walaeddine_4.Domaine.Vehicule;
 import tn.esprit.wesleti_walaeddine_4.Services.IVehiculeService;
-import tn.esprit.wesleti_walaeddine_4.Services.Impls.VehiculeServiceImpl;
 
 import java.util.List;
 
@@ -48,18 +47,19 @@ public class VehiculeRestController {
     }
 
 
-    @PutMapping("/{idVehicule}/{idAgence}")
-    Vehicule assignToAgence(@PathVariable Long idVehicule,@PathVariable Long idAgence) {
-    return vehiculeService.assignToAgence(idVehicule,idAgence);
+    // Affecter : PUT /api/vehicules/{idVehicule}/agences/{idAgence}
+    @PutMapping("{idVehicule}/agences/{idAgence}")
+    public Vehicule assignToAgence(@PathVariable("idVehicule") Long idVehicule, @PathVariable("idAgence") Long idAgence) {
+        return vehiculeService.assignToAgence(idVehicule, idAgence);
     }
     @PutMapping("/{idVehicule}/equipements/{idEquipement}")
     public Vehicule assignToEquipement(@PathVariable Long idVehicule, @PathVariable Long idEquipement) {
         return vehiculeService.assignToEquipement(idVehicule, idEquipement);
     }
+    // Desaffecter : PUT /api/vehicules/unassignToAgence/{idVehicule}/{idAgence}
     @PutMapping("unassignToAgence/{idVehicule}/{idAgence}")
-    Vehicule unassignToAgence(@PathVariable Long idVehicule,@PathVariable Long idAgence){
-        return vehiculeService.UnassignToAgence(idVehicule,idAgence);
-
+    public Vehicule unassignToAgence(@PathVariable("idVehicule") Long idVehicule, @PathVariable("idAgence") Long idAgence) {
+        return vehiculeService.unassignToAgence(idVehicule, idAgence);
     }
     @PutMapping("unassignToEquipement/{idVehicule}/{idEquipement}")
     public Vehicule unassignToEquipement(@PathVariable Long idVehicule, @PathVariable Long idEquipement) {
